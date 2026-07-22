@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+/* Light-mode body: warm pastel gradient (the original Apideck look).
+ * Pinned to the viewport so it fills the screen no matter the page height —
+ * otherwise a tall page shows a hard seam where the body box ends. */
+body {
+  font-feature-settings: "ss01", "cv11";
+  background: radial-gradient(120% 80% at 10% 0%, #ffd5b8 0%, transparent 60%),
+    radial-gradient(120% 80% at 90% 100%, #f9a8c8 0%, transparent 55%),
+    radial-gradient(120% 80% at 100% 0%, #ffe7c7 0%, transparent 60%),
+    linear-gradient(180deg, #fde7d6 0%, #f7c4d6 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/* Dark-mode body: deep ink with a subtle accent wash. */
+html.dark body {
+  background: radial-gradient(120% 80% at 10% 0%, #1a1a2e 0%, transparent 60%),
+    radial-gradient(120% 80% at 90% 100%, #1d0e2e 0%, transparent 55%),
+    radial-gradient(120% 80% at 100% 0%, #14142b 0%, transparent 60%),
+    linear-gradient(180deg, #0b0b14 0%, #15101e 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+.gradient-bg {
+  background: transparent;
+}
+
+/* Mac-style scrollbars on dark surfaces */
+.dark-scroll::-webkit-scrollbar {
+  width: 10px;
+}
+.dark-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+}
+.dark-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.06) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+}
+
+/* ---------------------------------------------------------------------------
+ * Light-mode override layer.
+ *
+ * The demo was originally authored dark-first, using ink/zinc Tailwind classes
+ * everywhere as hard-coded "dark" colors. Rather than dual-prefix every class
+ * across every component, this layer retargets the most-used utility classes
+ * when html is NOT in .dark mode, mapping them to light-appropriate values.
+ * MacWindow chrome, the page header, stepper and footer were converted to
+ * proper `dark:` variants directly — this layer covers everything inside.
+ * ------------------------------------------------------------------------- */
+@layer utilities {
+  /* Surfaces. Solid bg-ink-900 / bg-ink-950 are NOT remapped — they're used
+     as intentional dark accents (brand mark, active stepper pill, "Read the
+     docs" button, LaunchedFromBanner) and carry white text. The other ink
+     shades and all /opacity variants remap to light surfaces. */
+  html:not(.dark) .bg-ink-800 { background-color: #fafafa; }
+  html:not(.dark) .bg-ink-700 { background-color: #f4f4f5; }
+  html:not(.dark) .bg-ink-600 { background-color: #e4e4e7; }
+  html:not(.dark) .bg-ink-800\/60 { background-color: rgba(255, 255, 255, 0.7); }
+  html:not(.dark) .bg-ink-800\/40 { background-color: rgba(255, 255, 255, 0.55); }
+  html:not(.dark) .bg-ink-800\/80 { background-color: rgba(255, 255, 255, 0.85); }
+  html:not(.dark) .bg-ink-700\/60 { background-color: rgba(244, 244, 245, 0.7); }
+  html:not(.dark) .bg-ink-700\/40 { background-color: rgba(244, 244, 245, 0.55); }
+  html:not(.dark) .bg-ink-700\/50 { background-color: rgba(244, 244, 245, 0.6); }
+  html:not(.dark) .bg-ink-700\/70 { background-color: rgba(244, 244, 245, 0.8); }
+  html:not(.dark) .bg-ink-900\/40 { background-color: rgba(255, 255, 255, 0.55); }
+  html:not(.dark) .bg-ink-900\/80 { background-color: rgba(255, 255, 255, 0.85); }
+  html:not(.dark) .bg-ink-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  html:not(.dark) .hover\:bg-ink-600:hover { background-color: #e4e4e7; }
+  html:not(.dark) .hover\:bg-ink-700:hover { background-color: #f4f4f5; }
+  html:not(.dark) .hover\:bg-ink-700\/60:hover { background-color: rgba(244, 244, 245, 0.85); }
+  html:not(.dark) .hover\:bg-ink-700\/70:hover { background-color: rgba(244, 244, 245, 0.9); }
+
+  /* Text */
+  html:not(.dark) .text-zinc-50,
+  html:not(.dark) .text-zinc-100,
+  html:not(.dark) .text-zinc-200 { color: #16161f; }
+  html:not(.dark) .text-zinc-300 { color: #262633; }
+  html:not(.dark) .text-zinc-400 { color: rgba(22, 22, 31, 0.65); }
+  html:not(.dark) .text-zinc-500 { color: rgba(22, 22, 31, 0.55); }
+  html:not(.dark) .text-zinc-600 { color: rgba(22, 22, 31, 0.45); }
+  html:not(.dark) .hover\:text-zinc-100:hover { color: #0b0b10; }
+  html:not(.dark) .hover\:text-zinc-50:hover { color: #0b0b10; }
+
+  /* Rings + borders (white tints → black tints in light mode) */
+  html:not(.dark) .ring-white\/5 { --tw-ring-color: rgba(0, 0, 0, 0.06); }
+  html:not(.dark) .ring-white\/10 { --tw-ring-color: rgba(0, 0, 0, 0.08); }
+  html:not(.dark) .ring-white\/15 { --tw-ring-color: rgba(0, 0, 0, 0.1); }
+  html:not(.dark) .ring-white\/20 { --tw-ring-color: rgba(0, 0, 0, 0.14); }
+  html:not(.dark) .border-white\/5 { border-color: rgba(0, 0, 0, 0.06); }
+  html:not(.dark) .border-white\/10 { border-color: rgba(0, 0, 0, 0.08); }
+  html:not(.dark) .hover\:ring-black\/20:hover { --tw-ring-color: rgba(0, 0, 0, 0.2); }
+
+  /* Accent-on-tint chips (these are subtle tinted pills used everywhere) */
+  html:not(.dark) .bg-accent-500\/10 { background-color: rgba(61, 61, 240, 0.1); }
+  html:not(.dark) .bg-accent-500\/15 { background-color: rgba(61, 61, 240, 0.12); }
+  html:not(.dark) .bg-accent-500\/20 { background-color: rgba(61, 61, 240, 0.16); }
+  html:not(.dark) .ring-accent-500\/30 { --tw-ring-color: rgba(61, 61, 240, 0.4); }
+  html:not(.dark) .ring-accent-500\/40 { --tw-ring-color: rgba(61, 61, 240, 0.5); }
+
+  /* Subtle status tints used in aging buckets, payment status, etc. become
+     a touch stronger in light mode so they don't disappear on white. */
+  html:not(.dark) .bg-emerald-500\/15 { background-color: rgba(16, 185, 129, 0.12); }
+  html:not(.dark) .bg-sky-500\/15 { background-color: rgba(14, 165, 233, 0.12); }
+  html:not(.dark) .bg-amber-500\/10 { background-color: rgba(245, 158, 11, 0.12); }
+  html:not(.dark) .bg-amber-500\/15 { background-color: rgba(245, 158, 11, 0.14); }
+  html:not(.dark) .bg-orange-500\/15 { background-color: rgba(249, 115, 22, 0.12); }
+  html:not(.dark) .bg-rose-500\/15 { background-color: rgba(244, 63, 94, 0.12); }
+  html:not(.dark) .text-emerald-300 { color: #047857; }
+  html:not(.dark) .text-emerald-400 { color: #059669; }
+  html:not(.dark) .text-sky-300 { color: #0369a1; }
+  html:not(.dark) .text-amber-300 { color: #b45309; }
+  html:not(.dark) .text-orange-300 { color: #c2410c; }
+  html:not(.dark) .text-rose-300 { color: #be123c; }
+  html:not(.dark) .text-violet-300 { color: #6d28d9; }
+
+  /* Code panels (MockApiCall) keep their terminal-style dark aesthetic in
+     both modes. The outer .code-panel scope reverts the light-mode text
+     overrides so zinc/status colors stay readable on the dark surface. */
+  html:not(.dark) .code-panel .text-zinc-200 { color: rgba(255, 255, 255, 0.92); }
+  html:not(.dark) .code-panel .text-zinc-300 { color: rgba(255, 255, 255, 0.85); }
+  html:not(.dark) .code-panel .text-zinc-400 { color: rgba(255, 255, 255, 0.6); }
+  html:not(.dark) .code-panel .text-zinc-500 { color: rgba(255, 255, 255, 0.45); }
+  html:not(.dark) .code-panel .text-emerald-200 { color: #a7f3d0; }
+  html:not(.dark) .code-panel .text-emerald-300 { color: #6ee7b7; }
+  html:not(.dark) .code-panel .text-emerald-400 { color: #34d399; }
+  html:not(.dark) .code-panel .text-rose-300 { color: #fda4af; }
+  html:not(.dark) .code-panel .text-amber-300 { color: #fcd34d; }
+  html:not(.dark) .code-panel .text-sky-300 { color: #7dd3fc; }
+  html:not(.dark) .code-panel .hover\:text-zinc-200:hover { color: rgba(255, 255, 255, 0.95); }
+}
