@@ -9,3 +9,7 @@
 .vercel
 *.tsbuildinfo
 next-env.d.ts
+
+# Internal-only docs (never published — sales/demo prep, notes)
+*.internal.md
+/internal/
