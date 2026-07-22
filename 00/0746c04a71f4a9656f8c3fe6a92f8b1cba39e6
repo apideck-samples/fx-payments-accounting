@@ -1,0 +1,19 @@
+.gitignore
+  s_772269fa4421c9::t_55a9a6b54b1f1b 12-15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "000746c04a71f4a9656f8c3fe6a92f8b1cba39e6",
+  "prompts": {},
+  "sessions": {
+    "s_772269fa4421c9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bce5251b-1fce-4b01-b271-cd0bcf446c22",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "GJ <info@gertjandewilde.com>"
+    }
+  }
+}
