@@ -158,3 +158,4 @@ Other open-source samples in the [`apideck-samples`](https://github.com/apideck-
 - [**bank-feeds-sync**](https://github.com/apideck-samples/bank-feeds-sync) — Bank Feeds API onboarding + continuous push to Xero, QuickBooks, Sage, FreshBooks.
 - [**vault**](https://github.com/apideck-samples/vault) — managing integration settings with the Vault API.
 - [**hris-employees-sync**](https://github.com/apideck-samples/hris-employees-sync) — sync employees across HRIS providers, onboard via MCP, listen to lifecycle webhooks.
+- [**smb-suite**](https://github.com/apideck-samples/smb-suite) — unified Accounting + HRIS feed powering an SMB business-health dashboard and bank-side lending view.
