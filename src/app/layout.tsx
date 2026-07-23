@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import "./globals.css";
 import { SessionProvider } from "@/lib/session";
+import { PostHogProvider } from "@/components/PostHogProvider";
+import PostHogTracking from "@/components/PostHogTracking";
 
 export const metadata: Metadata = {
   title: "Apideck FX Payments — Cross-border reconciliation, any ERP",
@@ -34,7 +37,12 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className="min-h-screen antialiased text-ink-900 dark:text-zinc-100">
-        <SessionProvider>{children}</SessionProvider>
+        <PostHogProvider>
+          <SessionProvider>{children}</SessionProvider>
+          <Suspense fallback={null}>
+            <PostHogTracking />
+          </Suspense>
+        </PostHogProvider>
       </body>
     </html>
   );
