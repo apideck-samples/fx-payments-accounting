@@ -37,7 +37,7 @@
   "dependencies": {
     "@apideck/vault-js": "^1.8.0",
     "lucide-react": "^0.460.0",
-    "next": "^14.2.35",
+    "next": "^15.5.21",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
