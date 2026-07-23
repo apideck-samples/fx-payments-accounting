@@ -1,0 +1,35 @@
+src/components/BootLoader.tsx
+  s_772269fa4421c9::t_056e820e17c9c4 1-80
+src/lib/launchParams.ts
+  s_772269fa4421c9::t_3836fe86e16027 24-25,32-51,64,76
+README.md
+  s_772269fa4421c9::t_be3e6360512b9b 129
+tailwind.config.ts
+  s_772269fa4421c9::t_78ffe881a93e08 29-32
+src/app/layout.tsx
+  s_772269fa4421c9::t_4e1c0a8bd3b05a 29-48
+  s_772269fa4421c9::t_3bc6c657384b25 58
+src/app/page.tsx
+  s_772269fa4421c9::t_cb16cd04f91b82 96
+  s_772269fa4421c9::t_6d3ef814bb31b0 11
+src/app/globals.css
+  s_772269fa4421c9::t_c7133052c9946e 61-80
+  s_772269fa4421c9::t_3b5d81468859ec 7-10
+  s_772269fa4421c9::t_2c6fecaabbdbcb 145-146
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "a3e9fe381e3f3ddb34136ee125f4b8ea5ba22567",
+  "prompts": {},
+  "sessions": {
+    "s_772269fa4421c9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bce5251b-1fce-4b01-b271-cd0bcf446c22",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "GJ <info@gertjandewilde.com>"
+    }
+  }
+}
