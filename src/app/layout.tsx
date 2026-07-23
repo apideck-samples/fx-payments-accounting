@@ -35,10 +35,18 @@ const colorInitScript = `
     // Preload the prospect favicon so the boot loader can show it immediately.
     var dom = p.get('domain') || p.get('logo');
     if (dom) {
-      var link = document.createElement('link');
-      link.rel = 'preload'; link.as = 'image';
-      link.href = 'https://www.google.com/s2/favicons?domain=' + dom + '&sz=128';
-      document.head.appendChild(link);
+      var favUrl = 'https://www.google.com/s2/favicons?domain=' + dom + '&sz=128';
+      // Preload so the boot loader can show the prospect logo immediately.
+      var pre = document.createElement('link');
+      pre.rel = 'preload'; pre.as = 'image'; pre.href = favUrl;
+      document.head.appendChild(pre);
+      // Also swap the browser-tab favicon to the prospect's logo. On error it
+      // falls back to the default Apideck icon (which stays as a static <link>).
+      var icon = document.createElement('link');
+      icon.rel = 'icon'; icon.href = favUrl;
+      var img = new Image();
+      img.onload = function(){ document.head.appendChild(icon); };
+      img.src = favUrl;
     }
     var raw = p.get('color') || p.get('primary');
     if (!raw) return;
