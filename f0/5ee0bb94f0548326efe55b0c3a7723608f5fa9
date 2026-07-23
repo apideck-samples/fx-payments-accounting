@@ -1,0 +1,30 @@
+.env.example
+  s_772269fa4421c9::t_9421536467ed50 19-27
+src/app/layout.tsx
+  s_772269fa4421c9::t_4d6f0b7ca7630f 40-45
+  s_772269fa4421c9::t_f0edd320522254 2,5-6
+package.json
+  s_772269fa4421c9::t_ab846d539d0a8e 41
+src/components/PostHogProvider.tsx
+  s_772269fa4421c9::t_f02a23afa050e1 1-46
+src/components/PostHogTracking.tsx
+  s_772269fa4421c9::t_093bf4a6d1dcbb 1-90
+package-lock.json
+  s_772269fa4421c9::t_b165ba4a4ea476 15,262-283,332-337,557-566,597-604,666-670,1215-1252,1631-1635
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "f05ee0bb94f0548326efe55b0c3a7723608f5fa9",
+  "prompts": {},
+  "sessions": {
+    "s_772269fa4421c9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bce5251b-1fce-4b01-b271-cd0bcf446c22",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "GJ <info@gertjandewilde.com>"
+    }
+  }
+}
