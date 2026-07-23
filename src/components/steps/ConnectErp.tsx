@@ -21,7 +21,7 @@ function config(mode: Mode, prospect: string) {
   if (mode === "bankfeed") {
     return {
       services: BANK_FEED_SERVICES,
-      defaultSvc: "quickbooks",
+      defaultSvc: "xero",
       windowTitle: `${prospect} · connect your customer's ledger`,
       heading: (
         <>
@@ -32,10 +32,10 @@ function config(mode: Mode, prospect: string) {
       sub: `Your customer authorizes once through Apideck Vault. ${prospect}'s wallets then appear as bank accounts in whichever ledger they use — no per-system integration.`,
       overflow: (
         <>
-          Bank feeds run through <b className="font-medium">QuickBooks</b> (Intuit
-          Bank Feeds) and <b className="font-medium">Xero</b>; NetSuite via the
-          Apideck Bank Feed bundle — a narrower set than the 45+ unified
-          connectors, and growing.
+          Bank feeds run through <b className="font-medium">Xero</b> today;{" "}
+          <b className="font-medium">QuickBooks</b> (Intuit Bank Feeds) is in
+          development; NetSuite via the Apideck Bank Feed bundle — a narrower set
+          than the 45+ unified connectors, and growing.
         </>
       ),
       connectedMsg: "wallets are ready to sync as a bank feed.",
@@ -90,6 +90,7 @@ export default function ConnectErp({
   onConnected,
   prospect,
   mode = "payments",
+  embedded = false,
 }: {
   serviceId: string | null;
   onPick: (id: string) => void;
@@ -97,6 +98,7 @@ export default function ConnectErp({
   onConnected: () => void;
   prospect: string;
   mode?: Mode;
+  embedded?: boolean;
 }) {
   const cfg = config(mode, prospect);
   const [result, setResult] = useState<ApiResult>({ state: "idle" });
@@ -177,15 +179,22 @@ export default function ConnectErp({
                         : "bg-ink-800/40 ring-white/10 hover:ring-black/20 dark:hover:ring-white/20"
                     }`}
                   >
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between gap-2">
                       <span className="font-medium text-sm text-ink-900 dark:text-zinc-100">
                         {s.name}
                       </span>
-                      {s.embedded && (
-                        <span className="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-accent-500/15 text-accent-500 ring-1 ring-accent-500/30">
-                          {mode === "bankfeed" ? "Bundle" : "Embeddable"}
-                        </span>
-                      )}
+                      <span className="flex items-center gap-1.5 shrink-0">
+                        {s.status === "in_development" && (
+                          <span className="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-700 dark:text-amber-300 ring-1 ring-amber-500/30">
+                            In dev
+                          </span>
+                        )}
+                        {s.embedded && embedded && (
+                          <span className="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-accent-500/15 text-accent-500 ring-1 ring-accent-500/30">
+                            {mode === "bankfeed" ? "Bundle" : "Embeddable"}
+                          </span>
+                        )}
+                      </span>
                     </div>
                     <p className="text-[11px] text-ink-900/55 dark:text-zinc-500 mt-1 leading-snug">
                       {s.blurb}
@@ -223,10 +232,12 @@ export default function ConnectErp({
           </div>
         </MacWindow>
 
-        <div className="flex items-start gap-2.5 rounded-xl bg-accent-500/[0.06] ring-1 ring-accent-500/20 px-4 py-3 text-[12.5px] text-ink-900/70 dark:text-zinc-300">
-          <Sparkles className="w-4 h-4 text-accent-500 shrink-0 mt-0.5" />
-          <span>{cfg.note}</span>
-        </div>
+        {(mode === "bankfeed" || embedded) && (
+          <div className="flex items-start gap-2.5 rounded-xl bg-accent-500/[0.06] ring-1 ring-accent-500/20 px-4 py-3 text-[12.5px] text-ink-900/70 dark:text-zinc-300">
+            <Sparkles className="w-4 h-4 text-accent-500 shrink-0 mt-0.5" />
+            <span>{cfg.note}</span>
+          </div>
+        )}
       </div>
 
       <div className="lg:col-span-2">

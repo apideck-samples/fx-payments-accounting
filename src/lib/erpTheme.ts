@@ -11,6 +11,8 @@ export type ErpService = {
   name: string;
   blurb: string;
   embedded?: boolean;
+  /** GA unless marked — "in_development" renders an "In dev" badge. */
+  status?: "in_development";
 };
 
 export const ERP_SERVICES: ErpService[] = [
@@ -55,14 +57,15 @@ export const ERP_SERVICES: ErpService[] = [
 // the bank-feeds conversation rather than reusing the "45+ connectors" line.
 export const BANK_FEED_SERVICES: ErpService[] = [
   {
-    id: "quickbooks",
-    name: "QuickBooks Online",
-    blurb: "Intuit Bank Feeds — the primary bank-feed target",
-  },
-  {
     id: "xero",
     name: "Xero",
-    blurb: "Bank feeds via the Xero partner program",
+    blurb: "Bank feeds via the Xero partner program — live",
+  },
+  {
+    id: "quickbooks",
+    name: "QuickBooks Online",
+    blurb: "Intuit Bank Feeds — coming soon",
+    status: "in_development",
   },
   {
     id: "netsuite",

@@ -26,7 +26,7 @@ type Synced = { accountId?: string; statementId?: string; done: boolean };
 
 const DEFAULT_SVC: Record<UseCase, string> = {
   payments: "netsuite",
-  bankfeed: "quickbooks",
+  bankfeed: "xero",
 };
 
 export default function Page() {
@@ -44,9 +44,9 @@ export default function Page() {
   // Bank-feed-flow state
   const [syncedFeeds, setSyncedFeeds] = useState<Record<string, Synced>>({});
 
-  // One prospect brand for the whole demo (both flows). Defaults to a fictional
-  // FX provider; brand it for any real prospect at runtime with
-  // ?prospect_name=Acme%20FX&prospect=acme.com — no code change.
+  // One brand for the whole demo (both flows). Defaults to a fictional FX
+  // provider; brand it for any company at runtime with
+  // ?for=Acme%20FX&domain=acme.com — no code change.
   const { name: prospect, domain: prospectDomain } = useProspect(
     "Nimbus FX",
     null
@@ -122,6 +122,7 @@ export default function Page() {
               }
               prospect={prospect}
               mode={useCase}
+              embedded={launch.embedded}
             />
           )}
 

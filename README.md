@@ -10,11 +10,10 @@ differs by product shape:
   wallet into the customer's ledger as a native bank feed.
 
 Both run on the same Apideck unified **Accounting API** — different endpoints,
-one integration. The whole demo is tied to **one prospect brand** (a fictional
-FX provider by default), overridable via `?prospect_name=` / `?prospect=` — so
-both flows carry the same brand. Deep-link a flow with `?usecase=payments` or
-`?usecase=bankfeed`, and brand it for any prospect with
-`?prospect_name=Acme%20FX&prospect=acme.com` (no code change).
+one integration. The whole demo is tied to **one brand** (a fictional FX
+provider by default), overridable via `?for=` / `?domain=` — so both flows carry
+the same brand. Deep-link a flow with `?usecase=payments` or `?usecase=bankfeed`,
+and brand it for any company with `?for=Acme%20FX&domain=acme.com` (no code change).
 
 ## FX Payments flow
 
@@ -113,21 +112,22 @@ reconcile automatically.
 | Push statement | `POST /accounting/bank-feed-statements` | Stream the wallet's transactions for matching |
 
 **Honest coverage note:** bank feeds are a narrower set than the 45+ unified
-connectors — **QuickBooks** (Intuit Bank Feeds) and **Xero** lead, with
-**NetSuite** via the customer-installed Apideck Bank Feed bundle. Lead with
-QuickBooks + Xero; treat the rest as roadmap. (See the companion
+connectors — **Xero** is live, **QuickBooks** (Intuit Bank Feeds) is in
+development, and **NetSuite** works via the customer-installed Apideck Bank Feed
+bundle. Lead with Xero; treat the rest as roadmap. (See the companion
 [`bank-feeds-sync`](https://github.com/apideck-samples/bank-feeds-sync) sample
 for the raw end-user-setup flow.)
 
-## Brand it for a prospect
+## Brand it for a company
 
 No env file needed — pass query params:
 
 ```
 ?usecase=bankfeed                               # open the bank-feed flow
 ?usecase=payments                               # open the payments flow (default)
-?prospect_name=Acme%20FX&prospect=acme.com       # brand: label + favicon
-?service=quickbooks                              # pre-select the connector
+?for=Acme%20FX&domain=acme.com                   # brand: label + favicon
+?service=xero                                    # pre-select the connector
+?embedded=1                                      # show embedded-in-ERP badges + callout (off by default)
 ?consumer=acme-gmbh                              # forwarded as x-apideck-consumer-id
 ?source=apideck-samples                          # shows the "launched from" banner
 ```

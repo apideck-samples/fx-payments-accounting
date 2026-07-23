@@ -11,13 +11,21 @@ export type LaunchParams = {
   service: string | null;
   /** Optional consumer id forwarded into Apideck calls. */
   consumerId: string | null;
-  /** Live prospect-brand override — set ?prospect=domain.com&prospect_name=Acme
-   *  to brand the demo for a specific prospect without editing any file. */
+  /** Brand override — set ?for=Acme&domain=acme.com to brand the demo for a
+   *  company without editing any file. Neutral param names keep the shared
+   *  URL friendly (?for / ?company for the label, ?domain / ?logo for the icon). */
   prospectDomain: string | null;
   prospectName: string | null;
   /** Which flow to open first — ?usecase=bankfeed for the bank-feed story. */
   useCase: UseCase | null;
+  /** Show the embedded-in-ERP surface (Embeddable badges + callout). Off by
+   *  default; enable with ?embedded=1 (or true/yes). */
+  embedded: boolean;
 };
+
+function truthy(v: string | null): boolean {
+  return v === "1" || v === "true" || v === "yes";
+}
 
 function parse(search: string): LaunchParams {
   const p = new URLSearchParams(search);
@@ -27,9 +35,10 @@ function parse(search: string): LaunchParams {
     source: p.get("source") ?? p.get("utm_source"),
     service: isErpService(svc) ? svc : null,
     consumerId: p.get("consumer_id") ?? p.get("consumer"),
-    prospectDomain: p.get("prospect") ?? p.get("prospect_domain"),
-    prospectName: p.get("prospect_name"),
+    prospectDomain: p.get("domain") ?? p.get("logo"),
+    prospectName: p.get("for") ?? p.get("company"),
     useCase: uc === "bankfeed" || uc === "payments" ? (uc as UseCase) : null,
+    embedded: truthy(p.get("embedded")),
   };
 }
 
@@ -40,6 +49,7 @@ const EMPTY: LaunchParams = {
   prospectDomain: null,
   prospectName: null,
   useCase: null,
+  embedded: false,
 };
 
 export function useLaunchParams(): LaunchParams {
