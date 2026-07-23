@@ -1,0 +1,42 @@
+src/components/steps/ConnectErp.tsx
+  s_772269fa4421c9::t_0c0b2963ab92cf 35-38
+  s_772269fa4421c9::t_67c2a8ae148d7f 235-240
+  s_772269fa4421c9::t_f35905d2d934b0 182,186-197
+  s_772269fa4421c9::t_628193a4e6fca5 93,101
+  s_772269fa4421c9::t_0e3f27449c6b6c 24
+README.md
+  s_772269fa4421c9::t_4340289d3d4a0b 13-16
+  s_772269fa4421c9::t_e490d05a1533e1 121,128
+  s_772269fa4421c9::t_2d55a99e66ab89 115-117
+  s_772269fa4421c9::t_7fe0d5586effc9 129-130
+src/lib/erpTheme.ts
+  s_772269fa4421c9::t_13a02abb4d1c57 14-15
+  s_772269fa4421c9::t_d8a45f305dd878 62-68
+src/lib/launchParams.ts
+  s_772269fa4421c9::t_f7aa87a0f3163c 41
+  s_772269fa4421c9::t_e3c7d6492a3b2c 21-23,26-28
+  s_772269fa4421c9::t_798a8930b0163f 52
+  s_772269fa4421c9::t_1e530fdee571c9 15-16,38-39
+  s_772269fa4421c9::t_d37de9d99ab0d6 14
+  s_772269fa4421c9::t_ec43f1bc3d5ebd 29
+src/app/page.tsx
+  s_772269fa4421c9::t_b4972c5d8c169b 125
+  s_772269fa4421c9::t_ab4df998043a77 47-49
+  s_772269fa4421c9::t_26ceb979714f71 29
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "a15682607b0d3d69ba8ef6e29c83962686c07a27",
+  "prompts": {},
+  "sessions": {
+    "s_772269fa4421c9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bce5251b-1fce-4b01-b271-cd0bcf446c22",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "GJ <info@gertjandewilde.com>"
+    }
+  }
+}
