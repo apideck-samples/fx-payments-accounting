@@ -1,0 +1,21 @@
+package.json
+  s_772269fa4421c9::t_b7c88e6a4e05ff 40
+package-lock.json
+  s_772269fa4421c9::t_0cdf78ea568d05 2,8,10,14,26-28,87-89,92-94,107-109,122-124,137-139,152-154,167-169,182-184,197-199,212-214,855-857,859,874-882
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "f58717cf2899018467a1a7202b54dc5fd32f180c",
+  "prompts": {},
+  "sessions": {
+    "s_772269fa4421c9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bce5251b-1fce-4b01-b271-cd0bcf446c22",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "GJ <info@gertjandewilde.com>"
+    }
+  }
+}
