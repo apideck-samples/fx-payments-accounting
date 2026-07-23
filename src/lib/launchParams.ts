@@ -23,10 +23,20 @@ export type LaunchParams = {
   embedded: boolean;
   /** Prospect brand color as an "R G B" triplet (from ?color=), or null. */
   primaryColor: string | null;
+  /** Boot-loader visible ms (?loader=<ms>); 0 or "off" skips the loader. */
+  loaderMs: number | null;
 };
 
 function truthy(v: string | null): boolean {
   return v === "1" || v === "true" || v === "yes";
+}
+
+/** Boot-loader duration in ms from ?loader= ("off" or 0 skips it), else null. */
+function parseLoader(v: string | null): number | null {
+  if (v == null) return null;
+  if (v === "off") return 0;
+  const n = parseInt(v, 10);
+  return Number.isFinite(n) && n >= 0 ? Math.min(n, 10000) : null;
 }
 
 /** Parse a hex color (#rrggbb, rrggbb, #rgb) into a "R G B" triplet, or null. */
@@ -62,6 +72,7 @@ function parse(search: string): LaunchParams {
     useCase: uc === "bankfeed" || uc === "payments" ? (uc as UseCase) : null,
     embedded: truthy(p.get("embedded")),
     primaryColor: hexToRgbTriplet(p.get("color") ?? p.get("primary")),
+    loaderMs: parseLoader(p.get("loader")),
   };
 }
 
@@ -74,6 +85,7 @@ const EMPTY: LaunchParams = {
   useCase: null,
   embedded: false,
   primaryColor: null,
+  loaderMs: null,
 };
 
 export function useLaunchParams(): LaunchParams {

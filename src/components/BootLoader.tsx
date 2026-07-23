@@ -7,23 +7,30 @@ import { useEffect, useState } from "react";
 export default function BootLoader({
   prospect,
   domain,
+  durationMs = 2200,
 }: {
   prospect: string;
   domain: string | null;
+  /** Visible time before fade-out. ?loader=<ms> overrides; 0 skips the loader. */
+  durationMs?: number;
 }) {
   const [phase, setPhase] = useState<"in" | "out" | "gone">("in");
   const [logo, setLogo] = useState(false);
 
   useEffect(() => {
-    const t1 = setTimeout(() => setPhase("out"), 1150);
-    const t2 = setTimeout(() => setPhase("gone"), 1650);
+    if (durationMs <= 0) {
+      setPhase("gone");
+      return;
+    }
+    const t1 = setTimeout(() => setPhase("out"), durationMs);
+    const t2 = setTimeout(() => setPhase("gone"), durationMs + 500);
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
     };
-  }, []);
+  }, [durationMs]);
 
-  if (phase === "gone") return null;
+  if (phase === "gone" || durationMs <= 0) return null;
   const initial = prospect.trim().charAt(0).toUpperCase() || "A";
 
   return (
@@ -92,7 +99,10 @@ export default function BootLoader({
       </div>
 
       <div className="mt-7 h-1 w-52 overflow-hidden rounded-full bg-white/10">
-        <div className="h-full rounded-full bg-accent-500 boot-progress" />
+        <div
+          className="h-full rounded-full bg-accent-500 boot-progress"
+          style={{ animationDuration: `${durationMs}ms` }}
+        />
       </div>
 
       <div className="mt-5 text-center animate-fade-up">
