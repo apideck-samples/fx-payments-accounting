@@ -1,0 +1,23 @@
+src/app/page.tsx
+  s_772269fa4421c9::t_51dd96b68925be 96
+src/components/BootLoader.tsx
+  s_772269fa4421c9::t_51dd96b68925be 5-13,15,66,68-89
+src/app/layout.tsx
+  s_772269fa4421c9::t_174471f987610e 35-42
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "8d9219b43d706e8378bca24b7b267162fc56a1b4",
+  "prompts": {},
+  "sessions": {
+    "s_772269fa4421c9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bce5251b-1fce-4b01-b271-cd0bcf446c22",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "GJ <info@gertjandewilde.com>"
+    }
+  }
+}
