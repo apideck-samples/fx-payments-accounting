@@ -126,6 +126,7 @@ No env file needed — pass query params:
 ?usecase=bankfeed                               # open the bank-feed flow
 ?usecase=payments                               # open the payments flow (default)
 ?for=Acme%20FX&domain=acme.com                   # brand: label + favicon
+?color=635bff                                    # brand: primary/accent color (hex) — themes the whole UI
 ?service=xero                                    # pre-select the connector
 ?embedded=1                                      # show embedded-in-ERP badges + callout (off by default)
 ?consumer=acme-gmbh                              # forwarded as x-apideck-consumer-id

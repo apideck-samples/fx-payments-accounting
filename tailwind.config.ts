@@ -26,8 +26,10 @@ const config: Config = {
           500: "#3a3a4a",
         },
         accent: {
-          500: "#3d3df0",
-          600: "#2f2fdc",
+          // Driven by CSS variables so a prospect's brand color can be applied
+          // at runtime (see ?color= in launchParams). Defaults set in globals.css.
+          500: "rgb(var(--accent-500) / <alpha-value>)",
+          600: "rgb(var(--accent-600) / <alpha-value>)",
         },
       },
       boxShadow: {

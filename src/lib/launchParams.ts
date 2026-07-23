@@ -21,10 +21,32 @@ export type LaunchParams = {
   /** Show the embedded-in-ERP surface (Embeddable badges + callout). Off by
    *  default; enable with ?embedded=1 (or true/yes). */
   embedded: boolean;
+  /** Prospect brand color as an "R G B" triplet (from ?color=), or null. */
+  primaryColor: string | null;
 };
 
 function truthy(v: string | null): boolean {
   return v === "1" || v === "true" || v === "yes";
+}
+
+/** Parse a hex color (#rrggbb, rrggbb, #rgb) into a "R G B" triplet, or null. */
+export function hexToRgbTriplet(raw: string | null): string | null {
+  if (!raw) return null;
+  let h = raw.trim().replace(/^#/, "");
+  if (h.length === 3) h = h.split("").map((c) => c + c).join("");
+  if (!/^[0-9a-fA-F]{6}$/.test(h)) return null;
+  const r = parseInt(h.slice(0, 2), 16);
+  const g = parseInt(h.slice(2, 4), 16);
+  const b = parseInt(h.slice(4, 6), 16);
+  return `${r} ${g} ${b}`;
+}
+
+/** Darken an "R G B" triplet by `amount` (0–1) for hover shades. */
+export function darkenTriplet(triplet: string, amount = 0.14): string {
+  return triplet
+    .split(" ")
+    .map((n) => Math.max(0, Math.round(Number(n) * (1 - amount))))
+    .join(" ");
 }
 
 function parse(search: string): LaunchParams {
@@ -39,6 +61,7 @@ function parse(search: string): LaunchParams {
     prospectName: p.get("for") ?? p.get("company"),
     useCase: uc === "bankfeed" || uc === "payments" ? (uc as UseCase) : null,
     embedded: truthy(p.get("embedded")),
+    primaryColor: hexToRgbTriplet(p.get("color") ?? p.get("primary")),
   };
 }
 
@@ -50,6 +73,7 @@ const EMPTY: LaunchParams = {
   prospectName: null,
   useCase: null,
   embedded: false,
+  primaryColor: null,
 };
 
 export function useLaunchParams(): LaunchParams {

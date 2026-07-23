@@ -8,6 +8,7 @@ import Stepper, {
 } from "@/components/Stepper";
 import ThemeToggle from "@/components/ThemeToggle";
 import ApideckModeBadge from "@/components/ApideckModeBadge";
+import BootLoader from "@/components/BootLoader";
 import ConnectErp from "@/components/steps/ConnectErp";
 import Payables from "@/components/steps/Payables";
 import Settlement from "@/components/steps/Settlement";
@@ -92,6 +93,7 @@ export default function Page() {
 
   return (
     <main className="min-h-screen">
+      <BootLoader prospect={prospect} />
       <Header
         prospect={prospect}
         prospectDomain={prospectDomain}

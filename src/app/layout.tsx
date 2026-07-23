@@ -26,6 +26,26 @@ const themeInitScript = `
 })();
 `;
 
+// Apply a prospect brand color (?color= / ?primary=) to the accent CSS vars
+// before first paint — no flash, and the boot loader is already on-brand.
+const colorInitScript = `
+(function(){
+  try {
+    var p = new URLSearchParams(location.search);
+    var raw = p.get('color') || p.get('primary');
+    if (!raw) return;
+    var h = raw.replace(/^#/, '').trim();
+    if (h.length === 3) h = h.split('').map(function(c){ return c + c; }).join('');
+    if (!/^[0-9a-fA-F]{6}$/.test(h)) return;
+    var r = parseInt(h.slice(0,2),16), g = parseInt(h.slice(2,4),16), b = parseInt(h.slice(4,6),16);
+    var d = function(x){ return Math.max(0, Math.round(x * 0.86)); };
+    var el = document.documentElement;
+    el.style.setProperty('--accent-500', r + ' ' + g + ' ' + b);
+    el.style.setProperty('--accent-600', d(r) + ' ' + d(g) + ' ' + d(b));
+  } catch (e) {}
+})();
+`;
+
 export default function RootLayout({
   children,
 }: {
@@ -35,6 +55,7 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <script dangerouslySetInnerHTML={{ __html: colorInitScript }} />
       </head>
       <body className="min-h-screen antialiased text-ink-900 dark:text-zinc-100">
         <PostHogProvider>
