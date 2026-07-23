@@ -93,7 +93,7 @@ export default function Page() {
 
   return (
     <main className="min-h-screen">
-      <BootLoader prospect={prospect} />
+      <BootLoader prospect={prospect} domain={prospectDomain} />
       <Header
         prospect={prospect}
         prospectDomain={prospectDomain}

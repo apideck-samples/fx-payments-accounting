@@ -32,6 +32,14 @@ const colorInitScript = `
 (function(){
   try {
     var p = new URLSearchParams(location.search);
+    // Preload the prospect favicon so the boot loader can show it immediately.
+    var dom = p.get('domain') || p.get('logo');
+    if (dom) {
+      var link = document.createElement('link');
+      link.rel = 'preload'; link.as = 'image';
+      link.href = 'https://www.google.com/s2/favicons?domain=' + dom + '&sz=128';
+      document.head.appendChild(link);
+    }
     var raw = p.get('color') || p.get('primary');
     if (!raw) return;
     var h = raw.replace(/^#/, '').trim();

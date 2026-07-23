@@ -2,9 +2,17 @@
 import { useEffect, useState } from "react";
 
 // A brief, branded boot splash. Uses the dynamic accent (so it's already in the
-// prospect's color), plays an orbiting ring + progress sweep, then fades out.
-export default function BootLoader({ prospect }: { prospect: string }) {
+// prospect's color), shows the prospect's real logo (favicon) with an initial
+// fallback, plays an orbiting ring + progress sweep, then fades out.
+export default function BootLoader({
+  prospect,
+  domain,
+}: {
+  prospect: string;
+  domain: string | null;
+}) {
   const [phase, setPhase] = useState<"in" | "out" | "gone">("in");
+  const [logo, setLogo] = useState(false);
 
   useEffect(() => {
     const t1 = setTimeout(() => setPhase("out"), 1150);
@@ -55,10 +63,30 @@ export default function BootLoader({ prospect }: { prospect: string }) {
             }}
           />
         </div>
-        {/* brand tile */}
+        {/* brand tile — real logo (favicon) with initial fallback */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className="h-11 w-11 rounded-2xl bg-accent-500 text-white flex items-center justify-center font-bold text-lg ring-1 ring-white/15 shadow-lg">
-            {initial}
+          <span
+            className={`relative h-11 w-11 rounded-2xl overflow-hidden flex items-center justify-center ring-1 ring-white/15 shadow-lg transition-colors ${
+              logo ? "bg-white" : "bg-accent-500"
+            }`}
+          >
+            <span
+              className={`font-bold text-lg text-white ${logo ? "opacity-0" : "opacity-100"}`}
+            >
+              {initial}
+            </span>
+            {domain && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={`https://www.google.com/s2/favicons?domain=${domain}&sz=128`}
+                alt=""
+                className={`absolute inset-0 m-auto h-8 w-8 object-contain transition-opacity ${
+                  logo ? "opacity-100" : "opacity-0"
+                }`}
+                onLoad={() => setLogo(true)}
+                onError={() => setLogo(false)}
+              />
+            )}
           </span>
         </div>
       </div>
